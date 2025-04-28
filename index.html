@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,23 +40,22 @@
         .legendario { border: 4px solid orange; background-color: #ffdbac; }
         .mitico { border: 4px solid red; background-color: #ffc0c0; }
         .exclusivo { border: 4px solid gold; background-color: #fff7c0; }
-        .superexclusivo { border: 4px solid black; background-color: #ffcc00; animation: superGlow 1.5s infinite alternate; }
+        .superexclusivo { border: 4px solid black; background-color: #ffcc00; animation: superGlow 1.5s infinite alternate; }@keyframes glowEffect {
+        0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+        100% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
+    }
 
-        @keyframes glowEffect {
-            0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
-            100% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
-        }
+    @keyframes stickerGlow {
+        0% { filter: brightness(1); }
+        100% { filter: brightness(1.5); }
+    }
 
-        @keyframes stickerGlow {
-            0% { filter: brightness(1); }
-            100% { filter: brightness(1.5); }
-        }
+    @keyframes superGlow {
+        0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        100% { box-shadow: 0 0 30px rgba(255, 215, 0, 1); }
+    }
+</style>
 
-        @keyframes superGlow {
-            0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-            100% { box-shadow: 0 0 30px rgba(255, 215, 0, 1); }
-        }
-    </style>
 </head>
 <body>
     <h1>Canjeo de Estampas</h1>
@@ -66,61 +64,60 @@
     <script>
         function obtenerEstampasDelDia() {
             return [
-                { id: 1, nombre: "Abejita", costo: 10, img: "./imagenes/Abejita_Mielita.png", rareza: "raro" },
-                { id: 2, nombre: "Snoopy", costo: 12, img: "./imagenes/Snoopy.png", rareza: "epico" },
-                { id: 3, nombre: "Pikachu", costo: 14, img: "./imagenes/Pikachu.png", rareza: "legendario" },
-                { id: 4, nombre: "Hello Kitty", costo: 16, img: "./imagenes/Hello_Kitty.png", rareza: "mitico" },
-                { id: 5, nombre: "Cinnamoroll", costo: 18, img: "./imagenes/Cinnamoroll.png", rareza: "exclusivo" },
-                { id: 6, nombre: "My Melody", costo: 20, img: "./imagenes/My_Melody.png", rareza: "superexclusivo" }
+                { id: 1, nombre: "Pompompurin", costo: 10, img: "./imagenes/pompompurin-feliz.png", rareza: "raro" },
+                { id: 2, nombre: "Capibara Estudiante", costo: 12, img: "./imagenes/capibara-estudiante.png", rareza: "epico" },
+                { id: 3, nombre: "Capibara Regando", costo: 14, img: "./imagenes/capibara-regando.png", rareza: "legendario" },
+                { id: 4, nombre: "Cinnamoroll", costo: 16, img: "./imagenes/cinnamoroll-azul.png", rareza: "mitico" },
+                { id: 5, nombre: "Disfraz Morado", costo: 18, img: "./imagenes/disfraz-morado-divertido.png", rareza: "exclusivo" },
+                { id: 6, nombre: "Capibara Maestro", costo: 20, img: "./imagenes/capibara-maestro.png", rareza: "superexclusivo" }
             ];
-        }
+        }function renderStickers() {
+        const container = document.getElementById("stickerContainer");
+        container.innerHTML = "";
+        let stickers = obtenerEstampasDelDia();
+        stickers.forEach(sticker => {
+            let div = document.createElement("div");
+            div.className = `sticker ${sticker.rareza}`;
+            div.innerHTML = `
+                <img src="${sticker.img}" alt="${sticker.nombre}"><br>
+                <strong>${sticker.nombre}</strong><br>
+                <span style="font-size: 18px; color: black;">${sticker.rareza.toUpperCase()}</span><br>
+                Costo: ${sticker.costo} puntos<br>
+                <button onclick="canjear('${sticker.img}')">Canjear</button>
+            `;
+            container.appendChild(div);
+        });
+    }
 
-        function renderStickers() {
-            const container = document.getElementById("stickerContainer");
-            container.innerHTML = "";
-            let stickers = obtenerEstampasDelDia();
-            stickers.forEach(sticker => {
-                let div = document.createElement("div");
-                div.className = `sticker ${sticker.rareza}`;
-                div.innerHTML = `
-                    <img src="${sticker.img}" alt="${sticker.nombre}"><br>
-                    <strong>${sticker.nombre}</strong><br>
-                    <span style="font-size: 18px; color: black;">${sticker.rareza.toUpperCase()}</span><br>
-                    Costo: ${sticker.costo} puntos<br>
-                    <button onclick="canjear('${sticker.img}')">Canjear</button>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        function canjear(imagen) {
-            let cantidadPuntos = prompt("Ingrese la cantidad de puntos para canjear esta estampa:");
-            if (cantidadPuntos !== null && !isNaN(cantidadPuntos) && cantidadPuntos.trim() !== "") {
-                cantidadPuntos = parseInt(cantidadPuntos);
-                if (cantidadPuntos > 0) {
-                    imprimir(imagen);
-                } else {
-                    alert("Debe ingresar un número válido mayor a 0.");
-                }
+    function canjear(imagen) {
+        let cantidadPuntos = prompt("Ingrese la cantidad de puntos para canjear esta estampa:");
+        if (cantidadPuntos !== null && !isNaN(cantidadPuntos) && cantidadPuntos.trim() !== "") {
+            cantidadPuntos = parseInt(cantidadPuntos);
+            if (cantidadPuntos > 0) {
+                imprimir(imagen);
             } else {
-                alert("Entrada no válida. Intente nuevamente.");
+                alert("Debe ingresar un número válido mayor a 0.");
             }
+        } else {
+            alert("Entrada no válida. Intente nuevamente.");
         }
+    }
 
-        function imprimir(imagen) {
-            let ventana = window.open("", "_blank");
-            ventana.document.write("<html><head><title>Impresión de Estampas</title></head><body>");
-            ventana.document.write("<div style='display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; text-align: center;'>");
-            for (let i = 0; i < 36; i++) {
-                ventana.document.write(`<img src="${imagen}" style="width:100px; height:100px;">`);
-            }
-            ventana.document.write("</div>");
-            ventana.document.write("</body></html>");
-            ventana.document.close();
-            setTimeout(() => { ventana.print(); ventana.close(); }, 500);
+    function imprimir(imagen) {
+        let ventana = window.open("", "_blank");
+        ventana.document.write("<html><head><title>Impresión de Estampas</title></head><body>");
+        ventana.document.write("<div style='display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; text-align: center;'>");
+        for (let i = 0; i < 36; i++) {
+            ventana.document.write(`<img src="${imagen}" style="width:100px; height:100px;">`);
         }
+        ventana.document.write("</div>");
+        ventana.document.write("</body></html>");
+        ventana.document.close();
+        setTimeout(() => { ventana.print(); ventana.close(); }, 500);
+    }
 
-        renderStickers();
-    </script>
+    renderStickers();
+</script>
+
 </body>
 </html>
