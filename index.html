@@ -9,17 +9,19 @@
         body {
             font-family: 'Comic Neue', cursive;
             text-align: center;
-            background: #222;
+            background: url('./imagenes/fondo.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: white;
         }
         .sticker {
             display: inline-block;
             margin: 20px;
-            padding: 15px;
+            padding: 10px;
             border-radius: 10px;
             text-align: center;
             position: relative;
             background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
             animation: glowEffect 2s infinite alternate;
         }
         .sticker img {
@@ -61,16 +63,15 @@
     <h1>Canjeo de Estampas</h1>
     <h2>Estampas del Día</h2>
     <div id="stickerContainer"></div>
-
     <script>
         function obtenerEstampasDelDia() {
             return [
-                { id: 1, nombre: "Labubu Conejo Morado", costo: 10, img: "labubu_conejo_morado.jpg", rareza: "raro" },
-                { id: 2, nombre: "Piña Adorable", costo: 12, img: "piña_adorable.png", rareza: "epico" },
-                { id: 3, nombre: "Minecraft Steve", costo: 14, img: "minecraft_steve.png", rareza: "legendario" },
-                { id: 4, nombre: "Aguacate Corazón", costo: 16, img: "aguacate_corazon.png", rareza: "mitico" },
-                { id: 5, nombre: "Sandía Cara Feliz", costo: 18, img: "sandia_cara_feliz.png", rareza: "exclusivo" },
-                { id: 6, nombre: "Elote Sonriente", costo: 20, img: "elote_sonriente.png", rareza: "superexclusivo" }
+                { id: 1, nombre: "Labubu Conejo Morado", costo: 10, img: "./imagenes/labubu_conejo_morado.jpg", rareza: "raro" },
+                { id: 2, nombre: "Piña Adorable", costo: 12, img: "./imagenes/piña_adorable.png", rareza: "epico" },
+                { id: 3, nombre: "Minecraft Steve", costo: 14, img: "./imagenes/minecraft_steve.png", rareza: "legendario" },
+                { id: 4, nombre: "Aguacate Corazón", costo: 16, img: "./imagenes/aguacate_corazon.png", rareza: "mitico" },
+                { id: 5, nombre: "Sandía Cara Feliz", costo: 18, img: "./imagenes/sandia_cara_feliz.png", rareza: "exclusivo" },
+                { id: 6, nombre: "Elote Sonriente", costo: 20, img: "./imagenes/elote_sonriente.png", rareza: "superexclusivo" }
             ];
         }
 
